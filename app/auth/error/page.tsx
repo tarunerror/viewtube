@@ -1,10 +1,11 @@
-"use client"
+'use client'
 
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Suspense } from "react"
 
-export default function AuthError() {
+function AuthErrorContent() {
   const searchParams = useSearchParams()
   const error = searchParams.get("error")
 
@@ -45,4 +46,12 @@ export default function AuthError() {
       </Card>
     </div>
   )
-} 
+}
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={<div className="text-center mt-10">Loading error page...</div>}>
+      <AuthErrorContent />
+    </Suspense>
+  )
+}
